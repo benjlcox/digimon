@@ -4,8 +4,11 @@
 </head>
 
 <body>
-	<% @dig.each do |ip|%>
-		<p><%= ip %> </p>
+	<% @dig[:cname].each do |cname|%>
+		<p> <%= cname %> </p>
+	<% end %>
+	<% @dig[:arecord].each do |arecord|%>
+		<p> <%= arecord %> </p>
 	<% end %>
 </body>
 

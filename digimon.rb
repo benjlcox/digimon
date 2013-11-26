@@ -7,9 +7,12 @@ helpers do
 	def dig(url)
 		packet = Net::DNS::Resolver.start(url)
 		answer = packet.answer
-		ips = []
+		ips = {:cname => [], :arecord => []}
+		packet.each_cname do |cname|
+			ips[:cname].push("c => #{cname}")
+		end
 		packet.each_address do |ip|
-			ips.push(ip)
+			ips[:arecord].push("a => #{ip}")
 		end
 		return ips
 	end
