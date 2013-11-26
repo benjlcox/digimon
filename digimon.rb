@@ -9,10 +9,10 @@ helpers do
 		answer = packet.answer
 		ips = {:cname => [], :arecord => []}
 		packet.each_cname do |cname|
-			ips[:cname].push("c => #{cname}")
+			ips[:cname].push(cname)
 		end
 		packet.each_address do |ip|
-			ips[:arecord].push("a => #{ip}")
+			ips[:arecord].push(ip)
 		end
 		return ips
 	end
