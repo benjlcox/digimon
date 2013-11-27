@@ -4,10 +4,18 @@ require 'json'
 require 'whois'
 
 helpers do
-	def checkURL(url)
+	def digCheckURL(url)
 		#regex checks if the url already has www. or is a subdomain
 		if (url =~ /w{3}[\.].+|.+[\.].{4,}[\.].+/).nil?
 			return url.insert(0,"www.")
+		else
+			return url
+		end
+	end
+
+	def whoCheckURL(url)
+		if url.start_with?("www.")
+			return url.slice!("www.")
 		else
 			return url
 		end
@@ -28,7 +36,7 @@ helpers do
 
 	def whois(url)
 		whois = Whois::Client.new
-		p url
+
 		result = whois.lookup(url)
 		
 		if result.registrar != nil then result.registrar.name else nil end
@@ -37,13 +45,13 @@ helpers do
 end
 
 get '/lookup/:url' do
-    checkedURL = checkURL(params[:url])
+    checkedURL = digCheckURL(params[:url])
     @dig = dig(checkedURL)
     erb :lookup
 end
 
 get '/lookup.json' do
-    checkedURL = checkURL(params[:url])
+    checkedURL = digCheckURL(params[:url])
     @dig = dig(checkedURL)
     @dig.to_json
 end
