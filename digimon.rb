@@ -15,7 +15,7 @@ helpers do
 
 	def whoCheckURL(url)
 		if url.start_with?("www.")
-			return url.slice!("www.")
+			return url.chomp!("www.")
 		else
 			return url
 		end
