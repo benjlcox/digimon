@@ -57,11 +57,11 @@ get '/lookup.json' do
 end
 
 get '/whois.json' do
-    @who = whois(whoCheckURL(params[:url])
+    @who = whois(whoCheckURL(params[:url]))
     @who.to_json
 end
 
 get '/whois/:url' do
-    @who = whois(whoCheckURL(params[:url])
+    @who = whois(whoCheckURL(params[:url]))
     erb :whois
 end
