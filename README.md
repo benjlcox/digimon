@@ -7,6 +7,6 @@ Digimon is a rediculously small Sinatra app that does nothing but return DNS add
 
 Usage is simple:
     
-    For Dig just hit /lookup.json?url=google.com for JSON or /lookup/google.com for the HTML view
+-> For Dig just hit /lookup.json?url=google.com for JSON or /lookup/google.com for the HTML view
     
-    For Whois registrar name just hit /whois.json?url=google.com for JSON or /whois/google.com for the HTML view
+-> For Whois registrar name just hit /whois.json?url=google.com for JSON or /whois/google.com for the HTML view
