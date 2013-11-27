@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'net/dns'
 require 'json'
-require 'haml'
+require 'whois'
 
 helpers do
 	def dig(url)
@@ -16,6 +16,14 @@ helpers do
 		end
 		return ips
 	end
+
+	def whois(url)
+		whois = Whois::Client.new
+		result = whois.lookup(url)
+		
+		if result.registrar != nil then result.registrar.name else nil end
+	end
+
 end
 
 get '/lookup/:url' do
@@ -26,4 +34,14 @@ end
 get '/lookup.json' do
     @dig = dig(params[:url])
     @dig.to_json
+end
+
+get '/whois.json' do
+    @who = whois(params[:url])
+    @who.to_json
+end
+
+get '/whois/:url' do
+    @who = whois(params[:url])
+    erb :whois
 end
